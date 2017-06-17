@@ -1,4 +1,5 @@
 var Twitter = require('twitter');
+var logger = require('../utils/logger/twitter');
 
 var client = new Twitter({
   consumer_key: process.env.TWITTER_CONSUMER_KEY,
@@ -8,24 +9,23 @@ var client = new Twitter({
 });
 
 var twitter_track = {
-	track: 'javascript,jokowi,ahok,aniesbaswedan,prabowo,megawati,pemilu'
+  track: 'javascript,jokowi,ahok,aniesbaswedan,prabowo,megawati,pemilu'
 }
 
 var stream = client.stream('statuses/filter', twitter_track);
 
 exports.listen = function() {
-	stream.on('data', function(event) {
-	  console.log(event && event.text);
-	  // console.log(JSON.stringify(event.text));
-	});
-	 
-	stream.on('error', function(error) {
-	  stream.destroy();
-	  throw error;
-	});
+  stream.on('data', function(event) {
+    logger.info(event.text);
+  });
+
+  stream.on('error', function(error) {
+    logger.error(error);
+    throw error;
+  });
 }
 
 exports.onDestroy = function(options, err) {
-	console.log("Closing twitter stream");
-	stream.destroy();
+  logger.error("Closing twitter stream");
+  stream.destroy();
 }

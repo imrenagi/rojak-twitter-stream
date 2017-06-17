@@ -43,7 +43,7 @@ process.on('exit', twitterClient.onDestroy.bind(null,{cleanup:true}));
 process.on('SIGINT', twitterClient.onDestroy.bind(null, {exit:true}));
 
 //catches uncaught exceptions
-process.on('uncaughtException', twitterClient.onDestroy.bind(null, {exit:true}));
+// process.on('uncaughtException', twitterClient.onDestroy.bind(null, {exit:true}));
 
 /**
  * Normalize a port into a number, string, or false.
