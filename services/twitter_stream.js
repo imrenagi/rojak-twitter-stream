@@ -9,7 +9,8 @@ var client = new Twitter({
 });
 
 var twitter_track = {
-  track: 'javascript,jokowi,ahok,aniesbaswedan,prabowo,megawati,pemilu'
+  track: 'jokowi,aniesbaswedan,megawati,pemilu',
+  follow: '978808357,157604142'
 }
 
 var stream = client.stream('statuses/filter', twitter_track);
