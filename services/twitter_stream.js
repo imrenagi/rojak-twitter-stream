@@ -1,6 +1,8 @@
 var Twitter = require('twitter');
 var logger = require('../utils/logger/twitter');
 
+var redis = require('./db');
+
 var client = new Twitter({
   consumer_key: process.env.TWITTER_CONSUMER_KEY,
   consumer_secret: process.env.TWITTER_CONSUMER_SECRET,
@@ -18,6 +20,7 @@ var stream = client.stream('statuses/filter', twitter_track);
 exports.listen = function() {
   stream.on('data', function(event) {
     logger.info(event.text);
+    redis.publish("tweet", event.text);
   });
 
   stream.on('error', function(error) {
