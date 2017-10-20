@@ -11,7 +11,7 @@ var client = new Twitter({
 });
 
 var twitter_track = {
-  track: 'aniesbaswedan,sandiuno,DKIJakarta',
+  track: 'aniesbaswedan,sandiuno,DKIJakarta,Jakarta',
   follow: '110312278,132041617,166014938'
 }
 
