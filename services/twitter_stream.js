@@ -1,7 +1,7 @@
 var Twitter = require('twitter');
 var logger = require('../utils/logger/twitter');
 
-var redis = require('./db');
+// var redis = require('./db');
 
 var client = new Twitter({
   consumer_key: process.env.TWITTER_CONSUMER_KEY,
@@ -11,16 +11,19 @@ var client = new Twitter({
 });
 
 var twitter_track = {
-  track: 'jokowi,aniesbaswedan,megawati,pemilu',
-  follow: '978808357,157604142'
+  // track: 'gojektech,gojek,go-jek,gojekindonesia,go-food,go-ride,go-send,go-mart,go-box,go-pay,go-tix,go-pulsa,go-med,go-car,go-clean,go-massage,go-glam,go-point,gofood,goride,gosend,gomart,gobox,gopay,gotix,gopulsa,gomed,gocar,goclean,gomassage,goglam,gopoint',
+  // follow: '226481275,4483368134'
+  track: 'uber',
+  follow: '19103481'
+
 }
 
 var stream = client.stream('statuses/filter', twitter_track);
 
 exports.listen = function() {
   stream.on('data', function(event) {
-    logger.info(event.text);
-    redis.publish("tweet", event.text);
+    logger.info(event);
+    // redis.publish("tweet", event.text);
   });
 
   stream.on('error', function(error) {
