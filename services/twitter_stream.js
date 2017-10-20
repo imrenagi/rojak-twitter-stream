@@ -11,16 +11,16 @@ var client = new Twitter({
 });
 
 var twitter_track = {
-  track: 'jokowi,aniesbaswedan,megawati,pemilu',
-  follow: '978808357,157604142'
+  track: 'aniesbaswedan,sandiuno,DKIJakarta',
+  follow: '110312278,132041617,166014938'
 }
 
 var stream = client.stream('statuses/filter', twitter_track);
 
 exports.listen = function() {
   stream.on('data', function(event) {
-    logger.info(event.text);
-    redis.publish("tweet", event.text);
+    logger.info(event);
+    redis.publish("tweet", event);
   });
 
   stream.on('error', function(error) {
